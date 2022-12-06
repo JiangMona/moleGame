@@ -1,62 +1,62 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.InputStream;
-
 public class MenuPanel extends JPanel implements ActionListener{
 
 	private JButton game;//instructions
 	private JButton instructions;//level
-	private JButton btn3;//exit
+	private JButton highScore;
 	private JButton exit;//exit
-	//private Font pixelFont;
-	private ImageIcon bg;
-	private JLabel kirbyBg;
-	
-	public MenuPanel() throws FontFormatException, IOException {
+	private ImageIcon back;
+	private JLabel bg;
+	private static ImageIcon startGame, highS, instruct, leave;
+	public MenuPanel() {
+		
 		this.setLayout(null);//not using premade layout
-		game = new JButton("START GAME");//start from level 1
-		instructions = new JButton("INSTRUCTIONS"); 
-		btn3 = new JButton("EXTRA BUTTON"); 
-		exit = new JButton("EXIT"); 
-		bg = new ImageIcon("background.gif");
-		kirbyBg = new JLabel(bg);
-		//InputStream font = getClass().getResourceAsStream("PixelFont.ttf");
-		//pixelFont = Font.createFont(Font.TRUETYPE_FONT, font);
+		
+		startGame = new ImageIcon("startGame.png");
+		game = new JButton(startGame);//start from levl 1
+		makeClearButton(game);
+		/*
+		game.setOpaque(false);
+	    game.setContentAreaFilled(false);
+	    game.setBorderPainted(false);
+	    game.setFocusPainted(false);
+	    */
+	    instruct = new ImageIcon("instructions.png");
+		instructions = new JButton(instruct); 
+		makeClearButton(instructions);
+	    
+	    highS= new ImageIcon("highScore.png");
+		highScore = new JButton(highS); 
+		makeClearButton(highScore);
+		
+		leave= new ImageIcon("exit.png");
+		exit = new JButton(leave); 
+		makeClearButton(exit);
+
 		//b1.setLocation(30, 200);
 		//b1.setSize(200, 30);
 		game.setBounds(75, 300, 200, 30); //same thing as set location and set size
-		this.add(game);//use _this_ to refer to the main panel itself
-		instructions.setBounds(300, 300, 200, 30); 
-		this.add(instructions);
-		btn3.setBounds(75, 400, 200, 30); 
-		this.add(btn3);
-		exit.setBounds(300, 400, 200, 30); 
-		this.add(exit);
+		//this.add(game);//use _this_ to refer to the main panel itself
+		instructions.setBounds(300, 300, 250, 30); 
+		//this.add(instructions);
+		highScore.setBounds(75, 400, 200, 30); 
+		//this.add(highScore);
+		exit.setBounds(325, 395, 200, 35); 
+		//this.add(exit);
 		
-		game.addActionListener(this);
-		instructions.addActionListener(this);
-		btn3.addActionListener(this);
-		exit.addActionListener(this);
-		kirbyBg.setBounds(0, 0, 600, 600);
-		this.add(kirbyBg);
+		//ADDED ACTION LISTENER IN METHOD
+		back = new ImageIcon("background.gif");
+		bg= new JLabel(back);
+		bg.setBounds(0,0, 600, 600);
+		add(bg);
+		
 	}
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
-		super.paintComponent(g);;
-		/*try {
-			g.drawImage(ImageIO.read(new File("background.png")), 0, 0, this);
-			//g.drawImage(ImageIO.read(new File("kirbyBg.png")), 0, 0, this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
+		super.paintComponent(g);
 		g.setFont(new Font("SansSerif", Font.ITALIC, 30));
-		//g.setFont(pixelFont);
 		g.drawString("KIRBY ADVENTURES", 150, 150);
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -69,7 +69,7 @@ public class MenuPanel extends JPanel implements ActionListener{
 			//go to instructions
 			MainP.cardsL.show(MainP.cont, "instructions");
 		}
-		else if(e.getSource()==btn3) {
+		else if(e.getSource()==highScore) {
 			
 		}
 		else if(e.getSource()==exit) {
@@ -78,6 +78,17 @@ public class MenuPanel extends JPanel implements ActionListener{
 		}
 		      
 		
+	}
+	
+	public void makeClearButton(JButton b) {
+		//set appearance
+		b.setOpaque(false);
+		b.setContentAreaFilled(false);
+		b.setBorderPainted(false);
+		b.setFocusPainted(false);
+		//add cation listener
+		b.addActionListener(this);
+		this.add(b);//add button
 	}
 
 }
