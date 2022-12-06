@@ -1,10 +1,10 @@
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.*;
+import java.awt.image.*;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
-//kirb
+//kirby
 public class MainP extends JFrame{
 	
 	static CardLayout cardsL;//can't be private because we will be calling using other classes
@@ -13,7 +13,8 @@ public class MainP extends JFrame{
 	private GamePanel gameP;
 	private InstructionsPanel instructionsP;
 	
-	public MainP() {
+	public MainP(String title) throws FontFormatException, IOException {
+		super(title);
 		cont = getContentPane();
 		cardsL=new CardLayout();
 		cont.setLayout(cardsL);
@@ -28,16 +29,6 @@ public class MainP extends JFrame{
 		this.setContentPane(cont);
 		cardsL.show(cont, "menu");
 		
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		MainP javaFrame = new MainP();//my main frame 
-		
-		javaFrame.setSize(600, 600);
-		javaFrame.setVisible(true);
-		javaFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 
 }
