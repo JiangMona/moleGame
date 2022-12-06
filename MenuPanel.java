@@ -12,7 +12,9 @@ public class MenuPanel extends JPanel implements ActionListener{
 	private JButton instructions;//level
 	private JButton btn3;//exit
 	private JButton exit;//exit
-	private Font pixelFont;
+	//private Font pixelFont;
+	private ImageIcon bg;
+	private JLabel kirbyBg;
 	
 	public MenuPanel() throws FontFormatException, IOException {
 		this.setLayout(null);//not using premade layout
@@ -20,6 +22,8 @@ public class MenuPanel extends JPanel implements ActionListener{
 		instructions = new JButton("INSTRUCTIONS"); 
 		btn3 = new JButton("EXTRA BUTTON"); 
 		exit = new JButton("EXIT"); 
+		bg = new ImageIcon("background.gif");
+		kirbyBg = new JLabel(bg);
 		//InputStream font = getClass().getResourceAsStream("PixelFont.ttf");
 		//pixelFont = Font.createFont(Font.TRUETYPE_FONT, font);
 		//b1.setLocation(30, 200);
@@ -37,15 +41,18 @@ public class MenuPanel extends JPanel implements ActionListener{
 		instructions.addActionListener(this);
 		btn3.addActionListener(this);
 		exit.addActionListener(this);
+		kirbyBg.setBounds(0, 0, 600, 600);
+		this.add(kirbyBg);
 	}
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
 		super.paintComponent(g);;
-		try {
+		/*try {
 			g.drawImage(ImageIO.read(new File("background.png")), 0, 0, this);
 			//g.drawImage(ImageIO.read(new File("kirbyBg.png")), 0, 0, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		g.setFont(new Font("SansSerif", Font.ITALIC, 30));
 		//g.setFont(pixelFont);
 		g.drawString("KIRBY ADVENTURES", 150, 150);
