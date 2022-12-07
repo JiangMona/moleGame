@@ -37,13 +37,13 @@ public class MenuPanel extends JPanel implements ActionListener{
 
 		//b1.setLocation(30, 200);
 		//b1.setSize(200, 30);
-		game.setBounds(75, 300, 200, 30); //same thing as set location and set size
+		game.setBounds(75, 200, 200, 30); //same thing as set location and set size
 		//this.add(game);//use _this_ to refer to the main panel itself
-		instructions.setBounds(300, 300, 250, 30); 
+		instructions.setBounds(300, 200, 250, 30); 
 		//this.add(instructions);
-		highScore.setBounds(75, 400, 200, 30); 
+		highScore.setBounds(75, 300, 200, 30); 
 		//this.add(highScore);
-		exit.setBounds(325, 395, 200, 35); 
+		exit.setBounds(325, 300, 200, 35); 
 		//this.add(exit);
 		
 		//ADDED ACTION LISTENER IN METHOD
