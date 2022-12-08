@@ -1,31 +1,23 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class StatsP extends JPanel implements ActionListener, KeyListener{
+public class StatsP extends JPanel implements ActionListener{
 	ImageIcon scoreBoard;
 	private JButton back;
 	
 	public StatsP() {
-		scoreBoard= new ImageIcon("scoreBoard.png");//make image object 
-		JLabel score = new JLabel(scoreBoard);//add to a jlabal
-		/*
+		scoreBoard= new ImageIcon("scoreBoard.png");
+		JLabel score = new JLabel(scoreBoard);
 		back = new JButton("back");
-		back.addKeyListener( this );
-		back.setBounds(500, 300, 200, 30);
-		back.addActionListener(this);
 		this.add(back);
-		*/
-		this.add(score);//add labal to panel
-		
-		setBackground(Color.ORANGE);  
-		
+		back.addActionListener(this);
+		this.add(score);
 		
 	}
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
 		super.paintComponent(g);;
 		g.setFont(new Font("SansSerif", Font.ITALIC, 30));
 		g.drawString("Game", 150, 150);
-		
 		
 	}
 	

@@ -16,5 +16,9 @@ public class GamePanel extends JPanel{
 		this.add(play, BorderLayout.CENTER);
 		
 	}
+	 public void setFocusToGameP() {
+		 play.setFocusable(true);
+		 play.requestFocus();
+	 }
 	
 }

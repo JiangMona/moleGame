@@ -5,6 +5,7 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	private static ImageIcon player;
 	private int x, y, mouseX, mouseY;
 	private Timer myTimer;
+	private JButton b;
 	
 	
 	public PlayP() {
@@ -13,9 +14,12 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 		player = new ImageIcon("kirbyFly.gif");
 		x = 100;
 		y = 300;
-		
+		b = new JButton("abc");
+		setLayout(new FlowLayout());
+		add(b);
 		addMouseListener(this);
 		addKeyListener(this);
+		b.addKeyListener(this);
 		
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
@@ -23,7 +27,7 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(player.getImage(),x,y,60,40,null);
+		g.drawImage(player.getImage(),x,y,120,80,null);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -50,8 +54,9 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	public void mouseExited( MouseEvent e )  {   }
 	   
 	public void keyPressed( KeyEvent e ){  
-		if(e.getKeyCode()==65)
-			x -= 10;	
+		System.out.println("ee");
+		if(e.getKeyCode()==65) 
+			x -= 10;
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S"))
 	     	y -= 10;
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W"))
@@ -62,4 +67,5 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	}
 	
 	public void keyReleased( KeyEvent e ) {   }
+	public void keyTyped( KeyEvent e )   {   }
 }

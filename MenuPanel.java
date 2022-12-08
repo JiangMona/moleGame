@@ -63,6 +63,10 @@ public class MenuPanel extends JPanel implements ActionListener{
 		if(e.getSource()==game) {
 			//go to game
 			//MainP.cardsL.next(MainP.cont); //go to frame, go through layout, get next panel
+			MainP.menuP.setFocusable(false);
+			MainP.gameP.setFocusable(true);
+			MainP.gameP.requestFocus();
+			MainP.gameP.setFocusToGameP();
 			MainP.cardsL.show(MainP.cont, "game");//MainP is class -_> call static variable container 
 		}
 		else if(e.getSource()==instructions) {

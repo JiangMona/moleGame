@@ -9,8 +9,8 @@ public class MainP extends JFrame{
 	
 	static CardLayout cardsL;//can't be private because we will be calling using other classes
 	static Container cont;
-	private MenuPanel menuP;
-	private GamePanel gameP;
+	public static MenuPanel menuP;
+	static GamePanel gameP;
 	private InstructionsPanel instructionsP;
 	
 	public MainP(String title) throws FontFormatException, IOException {
