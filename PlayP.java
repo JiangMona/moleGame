@@ -1,13 +1,18 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 public class PlayP extends JPanel implements KeyListener, MouseListener, ActionListener{
 	private static ImageIcon player;
 	private int x, y, mouseX, mouseY;
 	private Timer myTimer;
 	private JButton b;
-	
-	
+	private boolean right;
+	private boolean stay;
+	private int vel;
+	private User user;
+	private BufferedImage playerImg=null;
 	public PlayP() {
 		addKeyListener( this );
 		setBackground(Color.YELLOW);  
@@ -20,14 +25,18 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 		addMouseListener(this);
 		addKeyListener(this);
 		b.addKeyListener(this);
+		user = new User(0,0);
 		
+		Sprite.loadImages();
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
+		right=false;
+	    stay=true;  
 	}
 	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		g.drawImage(player.getImage(),x,y,120,80,null);
+		 super.paintComponent(g);
+		 user.myDraw(g);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -56,11 +65,11 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	public void keyPressed( KeyEvent e ){  
 		System.out.println("ee");
 		if(e.getKeyCode()==65) 
-			x -= 10;
+			user.setRight();
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S"))
-	     	y -= 10;
+	     	y += 10;
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W"))
-			y += 10;
+			y -= 10;
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("D"))
 			x += 10;	
 		repaint();

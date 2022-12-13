@@ -11,7 +11,8 @@ public class Sprite {
 		public static void loadImages(){
 			try{
 				spriteImg = ImageIO.read(new File("kirbySprite.png")); 
-		    }catch(Exception e){
+		   
+			}catch(Exception e){
 			    System.out.print("Error" + e);
 		    }  
 			basicImg=spriteImg.getSubimage(9,161,21,21);
@@ -22,6 +23,7 @@ public class Sprite {
 			fly[2]= spriteImg.getSubimage(33,161,21,21);
 			fly[0]= spriteImg.getSubimage(57,161,21,21);		
 		}
+		
 	    public static BufferedImage getNextRight(){
 	       cnt=(cnt+1)%fly.length;
 		   return fly[cnt];
