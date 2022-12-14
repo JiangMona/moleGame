@@ -63,16 +63,23 @@ public class PlayP extends JPanel implements KeyListener, MouseListener, ActionL
 	public void mouseExited( MouseEvent e )  {   }
 	   
 	public void keyPressed( KeyEvent e ){  
-		System.out.println("ee");
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("A"))
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
 			user.setLeft();
+			System.out.println("move left");
+		}
 		
-		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S"))
+		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
 	     	user.setDown();
-		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W"))
+	     	System.out.println("move down");
+		}
+		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
 			user.setUp();
-		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("D"))
+			System.out.println("move up");
+		} 
+		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {
 			user.setRight();
+			System.out.println("move right");
+		}
 		repaint();
 	}
 	

@@ -60,7 +60,7 @@ public class User {
       else if(flyRight)//flying
         playerImg=	Sprite.getNextRight();
          
-      g.drawImage(playerImg,x,y,null); 
+      g.drawImage(playerImg,x,y, 40,40, null); 
    }	   
 
 }
