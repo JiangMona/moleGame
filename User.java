@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 public class User {
 	private int x,y;
-	private boolean right, flyRight, FlyLeft=true;//equal true for now, load left flying sprite
+	private boolean right, left, flyRight, flyLeft;//equal true for now, load left flying sprite
 	private boolean stay;
 	private int vel, vert;//left/right, up/down
 	private BufferedImage playerImg=null;
@@ -13,6 +13,7 @@ public class User {
      this.y=y;
      vel=0;
      right=false;
+     left = false;
      stay=true;  	 
    }
    public int getX(){
@@ -24,31 +25,30 @@ public class User {
    }
    public void setStay(){
 	  stay=true; 
-      right=false;   
+      right=false;  
       vel=0;
       vert=0;
    } 
    public void setRight(){
 	  flyRight=true; 
+	  flyLeft = false;
       stay=false;   
       vel=10;
       vert=0;
 	} 
    public void setLeft(){
-	  //flyLeft=true; ////////
-	  flyRight=true;
+	  flyLeft=true;
+	  flyRight=false;
       stay=false;   
       vel=-10;
       vert=0;
 	} 
    public void setUp(){
-	  flyRight=true; 
       stay=false;   
       vel=0;
       vert=-10;
 	} 
    public void setDown(){
-	  flyRight=false; 
       stay=false;
       vel=0;
       vert=+10;
@@ -59,8 +59,10 @@ public class User {
         playerImg = Sprite.getBasicImg();
       else if(flyRight)//flying
         playerImg=	Sprite.getNextRight();
+      else if(flyLeft)//flying
+          playerImg= Sprite.getNextLeft();
          
-      g.drawImage(playerImg,x,y, 40,40, null); 
+      g.drawImage(playerImg,x,y,null); 
    }	   
 
 }
