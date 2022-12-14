@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 public class User {
 	private int x,y;
-	private boolean right, left, flyRight, flyLeft;//equal true for now, load left flying sprite
+	private boolean flewRight, flyRight, flyLeft;//equal true for now, load left flying sprite
 	private boolean stay;
 	private int vel, vert;//left/right, up/down
 	private BufferedImage playerImg=null;
@@ -12,8 +12,7 @@ public class User {
      this.x=x;
      this.y=y;
      vel=0;
-     right=false;
-     left = false;
+     flewRight=true;
      stay=true;  	 
    }
    public int getX(){
@@ -25,13 +24,15 @@ public class User {
    }
    public void setStay(){
 	  stay=true; 
-      right=false;  
+      flyRight = false;
+      flyLeft = false;
       vel=0;
       vert=0;
    } 
    public void setRight(){
 	  flyRight=true; 
 	  flyLeft = false;
+	  flewRight=true;
       stay=false;   
       vel=10;
       vert=0;
@@ -39,6 +40,7 @@ public class User {
    public void setLeft(){
 	  flyLeft=true;
 	  flyRight=false;
+	  flewRight=false;
       stay=false;   
       vel=-10;
       vert=0;
@@ -55,14 +57,18 @@ public class User {
 	} 
 		   
    public void myDraw(Graphics g){
-	  if(stay)
-        playerImg = Sprite.getBasicImg();
+	  if(stay) {
+		  if(flewRight)
+			  playerImg = Sprite.getBasicRightImg();
+		  else
+			  playerImg = Sprite.getBasicLeftImg();
+	  }
       else if(flyRight)//flying
         playerImg=	Sprite.getNextRight();
       else if(flyLeft)//flying
           playerImg= Sprite.getNextLeft();
          
-      g.drawImage(playerImg,x,y,null); 
+      g.drawImage(playerImg,x,y,40, 40, null); 
    }	   
 
 }

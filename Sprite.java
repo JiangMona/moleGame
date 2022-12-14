@@ -4,7 +4,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Sprite {
-	private static BufferedImage spriteImg, basicImg;
+	private static BufferedImage spriteImg, basicRightImg, basicLeftImg;
 	   private static BufferedImage flyRight[];
 	   private static BufferedImage flyLeft[];
 	   private static int cnt=0;
@@ -15,7 +15,8 @@ public class Sprite {
 		    }catch(Exception e){
 			    System.out.print("Error" + e);
 		    }  
-			basicImg=spriteImg.getSubimage(9,161,21,21);
+			basicRightImg=spriteImg.getSubimage(9,161,21,21);
+			basicLeftImg=spriteImg.getSubimage(83,161,21,21);
 			  
 			flyRight= new BufferedImage[3];
 		   
@@ -38,8 +39,11 @@ public class Sprite {
 		   cnt=(cnt+1)%flyLeft.length;
 		   return flyLeft[cnt];
 		}
-	    public static BufferedImage getBasicImg(){
-		   return basicImg;
+	    public static BufferedImage getBasicRightImg(){
+		   return basicRightImg;
+		}
+	    public static BufferedImage getBasicLeftImg(){
+			   return basicLeftImg;
 		}
 }
 
