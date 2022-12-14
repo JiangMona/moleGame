@@ -19,8 +19,15 @@ public class User {
 	   return x;
    }	   
    public void move(){
-	    x+=vel;
-	    y+=vert;
+	   //if (x < 0 || y <0 || x> 600 || y > 446)
+	   if (x + vel < 0 || y + vert < 0||x + vel > 560 || y + vert > 406) {
+		   x+=0;
+		   y+=0;
+	   }
+	   else {
+	       x+=vel;
+	       y+=vert;
+	   }
    }
    public void setStay(){
 	  stay=true; 
