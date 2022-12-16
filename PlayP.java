@@ -3,65 +3,78 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
-public class PlayP extends JPanel implements KeyListener, MouseListener, ActionListener{
-	private static ImageIcon player;
-	private int x, y, mouseX, mouseY;
+public class PlayP extends JPanel implements KeyListener, ActionListener{
 	private Timer myTimer;
 	private JButton b;
-	private boolean right;
-	private boolean stay;
-	private int vel;
 	private User user;
-	private BufferedImage playerImg=null;
+	private ImageIcon water, land;
+	private int map[][]= {//1 is land 0 is water
+			{1,1,1,1,1,1,1,1,0,0,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,1,1,1,1,1,1,1,0,0,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,1,1,1,1,1,1,1,0,0,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,1,1,1,1,1,1,1,0,0,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,1}
+	};
+	//icons 
+
 	public PlayP() {
-		addKeyListener( this );
 		setBackground(Color.YELLOW);  
-		player = new ImageIcon("kirbyFly.gif");
-		x = 100;
-		y = 300;
 		b = new JButton("STARTGAME");
 		setLayout(new FlowLayout());
 		add(b);
-		addMouseListener(this);
 		addKeyListener(this);
 		b.addKeyListener(this);
 		////
-		user = new User(0,0);
+		user = new User(1,1);
 		Sprite.loadImages();
 		
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
-		right=false;
-	    stay=true;  
+		
+		water= new ImageIcon("water.gif");
+		land= new ImageIcon("land.png");
 	}
 	public void paintComponent(Graphics g){
 		 super.paintComponent(g);
+		
+		 
+		 for (int i =0; i< map.length;i++) {
+			 for (int j =0; j<map[0].length; j++) {
+				 if (map[i][j]==0) {
+					 g.drawImage(water.getImage(),i*50,j*50,50, 50, null); 
+				 }
+				 else {
+					 g.drawImage(land.getImage(),i*50,j*50,50, 50, null); 
+				 }
+			 }
+		 }
 		 user.myDraw(g);
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==myTimer){
 			user.move();
+			
 			repaint();
 		}
 	}
-	
-	public void mouseClicked( MouseEvent me ){
-	     
-		 mouseX= me.getX();// x coordinates of mouse clicked
-	     mouseY= me.getY();// y coordinates of mouse clicked
-		 
-	      x=mouseX;     // change x coordinates of the player to mouseX
-	      y=mouseY;
-	      repaint();   // call paintComponent method
-	   }
-
-	public void mousePressed( MouseEvent e ){   }
-	public void mouseReleased( MouseEvent e ){   }
-	public void mouseEntered( MouseEvent e ) {   }
-	public void mouseExited( MouseEvent e )  {   }
-	   
 	public void keyPressed( KeyEvent e ){  
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
 			user.setLeft();
