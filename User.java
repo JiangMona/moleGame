@@ -4,13 +4,14 @@ import java.awt.image.BufferedImage;
 public class User {
 	private int x,y;
 	private boolean flewRight, flyRight, flyLeft;//equal true for now, load left flying sprite
-	private boolean stay;
+	private boolean stay, upDown;
 	private int vel, vert;//left/right, up/down
 	private BufferedImage playerImg=null;
 
    public User(int x,int y){
      this.x=x;
      this.y=y;
+     upDown = false;
      vel=0;
      flewRight=true;
      stay=true;  	 
@@ -20,7 +21,7 @@ public class User {
    }	   
    public void move(){
 	   //if (x < 0 || y <0 || x> 600 || y > 446)
-	   if (x + vel < 0 || y + vert < 0||x + vel > 560 || y + vert > 406) {
+	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) {
 		   x+=0;
 		   y+=0;
 	   }
@@ -53,11 +54,13 @@ public class User {
       vert=0;
 	} 
    public void setUp(){
+	  upDown = true;
       stay=false;   
       vel=0;
       vert=-10;
 	} 
    public void setDown(){
+	  upDown = true;
       stay=false;
       vel=0;
       vert=+10;
@@ -69,6 +72,12 @@ public class User {
 			  playerImg = Sprite.getBasicRightImg();
 		  else
 			  playerImg = Sprite.getBasicLeftImg();
+	  }
+	  else if(upDown) {
+		  if(flewRight) 
+			  playerImg = Sprite.getNextRight();
+		  else
+			  playerImg = Sprite.getNextLeft();
 	  }
       else if(flyRight)//flying
         playerImg=	Sprite.getNextRight();
