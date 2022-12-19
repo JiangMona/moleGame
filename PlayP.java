@@ -7,20 +7,10 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	private Timer myTimer;
 	private JButton b;
 	private User user;
-	private ImageIcon water, land;
+	private Map map;
+	
 	private int num;
-	private int map[][]= {//1 is land 0 is water
-			{0,0,1,1,1,1,1,1,0,0,1,0},
-			{1,0,1,1,0,0,0,0,0,0,0,1},
-			{1,0,0,0,1,1,1,1,0,0,1,0},
-			{1,1,1,0,0,0,0,0,0,0,0,1},
-			{1,1,1,1,1,1,1,1,0,0,1,1},
-			{0,1,1,0,0,0,0,0,0,0,0,1},
-			{0,0,0,0,0,1,1,0,0,1,0,1},
-			{0,1,1,0,0,0,1,1,0,0,0,1},
-			{1,1,1,1,1,1,1,1,1,1,1,1}
-			
-	};
+	
 	//icons 
 
 	public PlayP() {
@@ -37,23 +27,13 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
+		map = new Map();
 		
-		water= new ImageIcon("water.gif");
-		land= new ImageIcon("land.png");
 	}
 	public void paintComponent(Graphics g){
 		 super.paintComponent(g);
 		 
-		 for (int i =0; i< map.length;i++) {
-			 for (int j =0; j<map[0].length; j++) {
-				 if (map[i][j]==0) {
-					 g.drawImage(water.getImage(),j*50,i*50,50, 50, null); 
-				 }
-				 else {
-					 g.drawImage(land.getImage(),j*50,i*50,50, 50, null); 
-				 }
-			 }
-		 }
+		 map.drawMap(g);
 		 user.myDraw(g); 
 	}
 	
