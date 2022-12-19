@@ -3,14 +3,13 @@ import java.awt.event.*;
 import javax.swing.*;
 public class StatsP extends JPanel implements ActionListener{
 	private ImageIcon scoreBoard, back;
-	private JButton backbtn;
+	private JButton backBtn;
 	public StatsP() {
 		this.setLayout(new BorderLayout());
-		
-		back= new ImageIcon("b.png");
-		backbtn = new JButton(back);
-		makeClearButton(backbtn);
-		add(backbtn, BorderLayout.EAST);
+		back= new ImageIcon("back.png");
+		backBtn = new JButton(back);
+		makeClearButton(backBtn);
+		add(backBtn, BorderLayout.EAST);
 
 	
 	}
@@ -22,7 +21,7 @@ public class StatsP extends JPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==backbtn) {
+		if(e.getSource()==backBtn) {
 			MainP.cardsL.show(MainP.cont, "menu");
 			//go to menu
 
