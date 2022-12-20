@@ -2,16 +2,23 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class StatsP extends JPanel implements ActionListener{
-	private ImageIcon scoreBoard, back;
-	private JButton backBtn;
+	private JPanel p;
+	private ImageIcon scoreBoard, back, startPause;
+	private JButton backBtn, startPauseBtn;
 	public StatsP() {
 		this.setLayout(new BorderLayout());
+		p = new JPanel();
+		p.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		add(p, BorderLayout.CENTER);
 		back= new ImageIcon("back.png");
 		backBtn = new JButton(back);
+		startPause = new ImageIcon("startPause.png");
+		startPauseBtn = new JButton(startPause);
 		makeClearButton(backBtn);
-		add(backBtn, BorderLayout.EAST);
+		makeClearButton(startPauseBtn);
+		p.add(startPauseBtn);
+		p.add(backBtn);
 
-	
 	}
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
 		
