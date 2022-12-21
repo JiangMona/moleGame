@@ -1,4 +1,4 @@
-import java.awt.Graphics;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 
@@ -17,10 +17,18 @@ public class Map {
 	};
 	private ImageIcon water, land;
 	
+	public Rectangle getRect(int x, int y){
+		return new Rectangle(x*50,y*50, 40, 40);   
+	} 
 	
+	public boolean isLand(int x, int y) {
+		if (map[x][y] == 1) {
+			return true;
+		}
+		return false;
+	}
 	
 	public void drawMap(Graphics g){
-		
 		water= new ImageIcon("water.gif");
 		land= new ImageIcon("land.png");
 		for (int i =0; i< map.length;i++) {

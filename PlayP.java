@@ -21,7 +21,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		addKeyListener(this);
 		b.addKeyListener(this);
 		////
-		user = new User(1, 400);
+		user = new User(1, 300);
 		Sprite.loadImages();
 		
 		myTimer = new Timer(120, this); 
@@ -39,8 +39,18 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==myTimer){
-			user.move();
 			
+			for (int i =0; i<9; i++) {
+				for (int j=0; j<12; j++) {
+					if (map.isLand(i,j)) {
+						if (user.getRect().intersects(map.getRect(i,j))) {
+							user.setStay();
+						}
+				
+					}
+				}
+			}	
+			user.move();
 			repaint();
 		}
 	}

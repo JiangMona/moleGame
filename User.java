@@ -1,4 +1,4 @@
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class User {
@@ -19,8 +19,14 @@ public class User {
    public int getX(){
 	   return x;
    }	   
+   public int getY(){
+	   return y;
+   }
    public void move(){
 	   //if (x < 0 || y <0 || x> 600 || y > 446)
+	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) {
+		  setStay();
+	   }
 	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) {
 		   x+=0;
 		   y+=0;
@@ -66,6 +72,11 @@ public class User {
       vert=+10;
 	} 
 		   
+   public Rectangle getRect(){
+	   return new Rectangle(x,y, 40, 40);   
+   }
+   
+   
    public void myDraw(Graphics g){
 	  if(stay) {
 		  if(flewRight)
