@@ -96,6 +96,7 @@ public class User {
           playerImg= Sprite.getNextLeft();
          
       g.drawImage(playerImg,x,y,40, 40, null); 
+      g.drawRect(x,y,40, 40); 
    }	   
 
 }
