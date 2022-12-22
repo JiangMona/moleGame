@@ -7,10 +7,12 @@ public class User {
 	private boolean stay, upDown;
 	private int vel, vert;//left/right, up/down
 	private BufferedImage playerImg=null;
+	private int lives;
 
    public User(int x,int y){
      this.x=x;
      this.y=y;
+     lives = 5;
      upDown = false;
      vel=0;
      flewRight=true;
@@ -74,9 +76,14 @@ public class User {
 	   return new Rectangle(x,y, 49, 49);   
    }
    
-   
    public Rectangle getUserMoveRect() {
 	   return new Rectangle(x+vel, y+vert, 49, 49);
+   }
+   
+   public void respawn() {
+	   x = 1;
+	   y = 300;
+	   lives--;
    }
    
    public void myDraw(Graphics g){
