@@ -71,12 +71,12 @@ public class User {
 	} 
 		   
    public Rectangle getRect(){
-	   return new Rectangle(x,y, 40, 40);   
+	   return new Rectangle(x,y, 49, 49);   
    }
    
    
    public Rectangle getUserMoveRect() {
-	   return new Rectangle(x+vel, y+vert, 40, 40);
+	   return new Rectangle(x+vel, y+vert, 49, 49);
    }
    
    public void myDraw(Graphics g){
@@ -97,8 +97,8 @@ public class User {
       else if(flyLeft)//flying
           playerImg= Sprite.getNextLeft();
          
-      g.drawImage(playerImg,x,y,40, 40, null); 
-      g.drawRect(x,y,40, 40); 
+      g.drawImage(playerImg,x,y,49, 49, null); 
+      g.drawRect(x,y,49, 49); 
    }	   
 
 }
