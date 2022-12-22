@@ -26,8 +26,6 @@ public class User {
 	   //if (x < 0 || y <0 || x> 600 || y > 446)
 	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) {
 		  setStay();
-	   }
-	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) {
 		   x+=0;
 		   y+=0;
 	   }
@@ -76,6 +74,10 @@ public class User {
 	   return new Rectangle(x,y, 40, 40);   
    }
    
+   
+   public Rectangle getUserMoveRect() {
+	   return new Rectangle(x+vel, y+vert, 40, 40);
+   }
    
    public void myDraw(Graphics g){
 	  if(stay) {

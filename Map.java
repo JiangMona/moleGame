@@ -18,7 +18,7 @@ public class Map {
 	private ImageIcon water, land;
 	
 	public Rectangle getRect(int x, int y){
-		return new Rectangle(x*50,y*50, 40, 40);   
+		return new Rectangle(x*50,y*50, 50, 50);   
 	} 
 	
 	public boolean isLand(int x, int y) {
@@ -38,7 +38,7 @@ public class Map {
 				 }
 				 else {
 					 g.drawImage(land.getImage(),j*50,i*50,50, 50, null); 
-					 g.drawRect(j*50,i*50,40, 40);
+					 g.drawRect(j*50,i*50,50, 50);
 
 				 }
 			 }

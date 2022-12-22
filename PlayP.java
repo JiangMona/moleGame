@@ -43,7 +43,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			for (int i =0; i<12; i++) {
 				for (int j=0; j<9; j++) {
 					if (map.isLand(j,i)) {
-						if (user.getRect().intersects(map.getRect(i,j))) {
+						if (user.getUserMoveRect().intersects(map.getRect(i,j))) {
 							user.setStay();
 							System.out.println("e");
 						}
