@@ -40,11 +40,12 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==myTimer){
 			
-			for (int i =0; i<9; i++) {
-				for (int j=0; j<12; j++) {
-					if (map.isLand(i,j)) {
+			for (int i =0; i<12; i++) {
+				for (int j=0; j<9; j++) {
+					if (map.isLand(j,i)) {
 						if (user.getRect().intersects(map.getRect(i,j))) {
 							user.setStay();
+							System.out.println("e");
 						}
 				
 					}
