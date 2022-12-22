@@ -38,7 +38,7 @@ public class Map {
 				 }
 				 else {
 					 g.drawImage(land.getImage(),j*50,i*50,50, 50, null); 
-					 g.drawRect(j*50,i*50,50, 50);
+					 //g.drawRect(j*50,i*50,50, 50);
 
 				 }
 			 }
