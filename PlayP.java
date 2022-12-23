@@ -25,13 +25,10 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		user = new User(1, 300);
 		//obst = new Obstacles((int)(Math.random()*600));
 		Sprite.loadImages();
-		obstacles = new ArrayList<Obstacles>();
 		
-		for(int i = 0; i < 6; i ++) {
-			obstacles.add(new Obstacles((int)(Math.random()*600) + 75, (int)(Math.random()*25)+150));
-		}
+		obstacles = new ArrayList<Obstacles>(); //initial obstacles first on screen
+		counter = 0; //count time
 		
-		counter = 0;
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
@@ -42,9 +39,11 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		 super.paintComponent(g);
 		 
 		 map.drawMap(g);
+		 
 		 user.myDraw(g);
+	
 		 for(int i = 0; i < obstacles.size();i++) {
-				obstacles.get(i).MyDraw(g);
+				obstacles.get(i).myDrawObst(g);
 			}
 	}
 	
@@ -54,29 +53,35 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 				for (int j=0; j<9; j++) {
 					if (map.isLand(j,i)) {
 						if (user.getUserMoveRect().intersects(map.getRect(i,j))) {
-							user.setStay();
+							user.setStay(); 
 						}
 				
 					}
 				}
 			}
 			
-			for (int i = 0; i < obstacles.size(); i++) {
-				if(obstacles.get(i).getRect().intersects(user.getRect()))
-					user.respawn();
-			}
 			
 			counter++;
-			if(counter%10 == 0) {
-				obstacles.add(new Obstacles((int)(Math.random()*600), 0));
+			
+			if(counter%30 == 0) {
+				obstacles.add(new Obstacles((int)(Math.random()*600)));//x coordinate of obstacle to be dropped 
 			}
-			user.move();
+			
 			for(int i = 0; i < obstacles.size();i++) {
-				if((int)(Math.random()*2) == 1)
-					obstacles.get(i).moveObstLeft();
-				else
-					obstacles.get(i).moveObstRight();
+				//collisions, moving and removing obstacles
+				if(obstacles.get(i).getRect().intersects(user.getRect()))
+					user.respawn();
+				
+				if(obstacles.get(i).isOutOfScreen()) {
+					obstacles.remove(i);
+					System.out.println("REMOVED");
+				}
+				obstacles.get(i).moveObst();
 			}
+			
+			//move user and repaint
+			user.move();
+			
 			repaint();
 		}
 	}
@@ -85,7 +90,6 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			user.setLeft();
 			System.out.println("move left");
 		}
-		
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
 	     	user.setDown();
 	     	System.out.println("move down");
@@ -98,7 +102,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			user.setRight();
 			System.out.println("move right");
 		}
-		repaint();
+	//	repaint();
 	}
 	
 	public void keyReleased( KeyEvent e ) {   

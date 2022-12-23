@@ -73,11 +73,11 @@ public class User {
 	} 
 		   
    public Rectangle getRect(){
-	   return new Rectangle(x,y, 49, 49);   
+	   return new Rectangle(x, y, 37, 37);   
    }
-   
+ 
    public Rectangle getUserMoveRect() {
-	   return new Rectangle(x+vel, y+vert, 49, 49);
+	   return new Rectangle(x+vel, y+vert, 37, 37);
    }
    
    public void respawn() {
@@ -104,7 +104,7 @@ public class User {
       else if(flyLeft)//flying
           playerImg= Sprite.getNextLeft();
          
-      g.drawImage(playerImg,x,y,49, 49, null); 
+      g.drawImage(playerImg,x,y, 37, 37, null); 
       //g.drawRect(x,y,49, 49); 
    }	   
 
