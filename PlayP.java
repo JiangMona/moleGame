@@ -29,10 +29,23 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		obstacles = new ArrayList<Obstacles>(); //initial obstacles first on screen
 		counter = 0; //count time
 		
+		for(int i = 0; i < 3; i++) { // spawn a few ice cubes at first so the user can't just run past the first row 
+			obstacles.add(new Obstacles((int)(Math.random()*500)+50, 125));
+		}
+		
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
 		map = new Map();
+		
+		for (int i =0; i<12; i++) {
+			for (int j=0; j<9; j++) {
+				if (map.isLand(j,i)) {
+					obstacles.add(new Star(i*50, j*50));
+			
+				}
+			}
+		}
 		
 	}
 	public void paintComponent(Graphics g){
@@ -43,8 +56,8 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		 user.myDraw(g);
 	
 		 for(int i = 0; i < obstacles.size();i++) {
-				obstacles.get(i).myDrawObst(g);
-			}
+				obstacles.get(i).myDraw(g);
+		 }
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -60,23 +73,31 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 				}
 			}
 			
-			
 			counter++;
 			
-			if(counter%30 == 0) {
-				obstacles.add(new Obstacles((int)(Math.random()*600)));//x coordinate of obstacle to be dropped 
+			if(counter%15 == 0) {
+				obstacles.add(new Obstacles((int)(Math.random()*600), -3));//x coordinate of obstacle to be dropped 
 			}
 			
 			for(int i = 0; i < obstacles.size();i++) {
 				//collisions, moving and removing obstacles
-				if(obstacles.get(i).getRect().intersects(user.getRect()))
-					user.respawn();
+				if(obstacles.get(i).isIceCube()) 
+					obstacles.get(i).moveObst();
+				if(obstacles.get(i).getRect().intersects(user.getRect())) {
+					if(obstacles.get(i).isIceCube()) {
+						user.loseLife();
+						obstacles.get(i).setY(obstacles.get(i).getY() + 50);
+					}
+					else {
+						user.addScore();
+						obstacles.remove(i);
+					}
+				}
 				
 				if(obstacles.get(i).isOutOfScreen()) {
 					obstacles.remove(i);
 					System.out.println("REMOVED");
 				}
-				obstacles.get(i).moveObst();
 			}
 			
 			//move user and repaint

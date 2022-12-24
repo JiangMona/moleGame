@@ -6,18 +6,28 @@ public class User {
 	private boolean flewRight, flyRight, flyLeft;//equal true for now, load left flying sprite
 	private boolean stay, upDown;
 	private int vel, vert;//left/right, up/down
+	private int score, lives;
 	private BufferedImage playerImg=null;
-	private int lives;
 
    public User(int x,int y){
      this.x=x;
      this.y=y;
-     lives = 5;
      upDown = false;
      vel=0;
      flewRight=true;
-     stay=true;  	 
+     stay=true;  
+     score = 0;
+     lives = 5;
    }
+   
+   public int getScore() {
+	   return score;
+   }
+   
+   public int getLives() {
+	   return lives;
+   }
+   
    public int getX(){
 	   return x;
    }	   
@@ -73,17 +83,26 @@ public class User {
 	} 
 		   
    public Rectangle getRect(){
-	   return new Rectangle(x, y, 37, 37);   
-   }
- 
-   public Rectangle getUserMoveRect() {
-	   return new Rectangle(x+vel, y+vert, 37, 37);
+	   return new Rectangle(x,y, 49, 49);   
    }
    
-   public void respawn() {
-	   x = 1;
-	   y = 300;
-	   lives--;
+   public Rectangle getUserMoveRect() {
+	   return new Rectangle(x+vel, y+vert, 49, 49);
+   }
+   
+   public void loseLife() {
+	   lives -= 1;
+	   if(lives <= 0) {
+		   lives = 5;
+		   x = 1;
+		   y = 300;
+		   score = 0;
+	   }
+	   
+   }
+   
+   public void addScore() {
+	   score += 50;
    }
    
    public void myDraw(Graphics g){
@@ -104,7 +123,7 @@ public class User {
       else if(flyLeft)//flying
           playerImg= Sprite.getNextLeft();
          
-      g.drawImage(playerImg,x,y, 37, 37, null); 
+      g.drawImage(playerImg,x,y,49, 49, null); 
       //g.drawRect(x,y,49, 49); 
    }	   
 
