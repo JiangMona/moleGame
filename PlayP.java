@@ -15,8 +15,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	
 	//icons 
 
-	public PlayP() {
-		setBackground(Color.YELLOW);  
+	public PlayP() { 
 		b = new JButton("STARTGAME");
 		setLayout(new FlowLayout());
 		add(b);
@@ -25,28 +24,29 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		user = new User(1, 300);
 		//obst = new Obstacles((int)(Math.random()*600));
 		Sprite.loadImages();
-		
-		obstacles = new ArrayList<Obstacles>(); //initial obstacles first on screen
-		counter = 0; //count time
-		
-		for(int i = 0; i < 3; i++) { // spawn a few ice cubes at first so the user can't just run past the first row 
-			obstacles.add(new Obstacles((int)(Math.random()*500)+50, 125));
-		}
-		
 		myTimer = new Timer(120, this); 
 	    myTimer.start();
 		setFocusable(true);
 		map = new Map();
 		
+		obstacles = new ArrayList<Obstacles>(); //initial obstacles first on screen
+		counter = 0; //count time
+		
+		
+		for(int i = 0; i < 3; i++) { // spawn a few ice cubes at first so the user can't just run past the first row 
+			Obstacles ice = new Obstacles((int)(Math.random()*500)+50, 125);
+			obstacles.add(ice);
+		}
+		
 		for (int i =0; i<12; i++) {
-			for (int j=0; j<9; j++) {
-				if (map.isLand(j,i)) {
-					obstacles.add(new Star(i*50, j*50));
-			
+			for (int j=0; j<9; j++) { 
+				if ((int)(Math.random()*5+1)%5==0 && !map.isLand(j,i)) { //make stars spawn randomly
+						Obstacles star = new Star(i*50, j*50);
+						obstacles.add(star);
+					
 				}
 			}
 		}
-		
 	}
 	public void paintComponent(Graphics g){
 		 super.paintComponent(g);
@@ -83,14 +83,17 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 				//collisions, moving and removing obstacles
 				if(obstacles.get(i).isIceCube()) 
 					obstacles.get(i).moveObst();
+				
 				if(obstacles.get(i).getRect().intersects(user.getRect())) {
-					if(obstacles.get(i).isIceCube()) {
+					if(obstacles.get(i).isIceCube()) {  //move ice down
 						user.loseLife();
 						obstacles.get(i).setY(obstacles.get(i).getY() + 50);
 					}
-					else {
+					
+					else {//is star
 						user.addScore();
-						obstacles.remove(i);
+						obstacles.remove(i); //remove star
+						System.out.println("yum");
 					}
 				}
 				
@@ -98,6 +101,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 					obstacles.remove(i);
 					System.out.println("REMOVED");
 				}
+				
 			}
 			
 			//move user and repaint
@@ -109,19 +113,19 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	public void keyPressed( KeyEvent e ){  
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("A")) {
 			user.setLeft();
-			System.out.println("move left");
+			//System.out.println("move left");
 		}
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
 	     	user.setDown();
-	     	System.out.println("move down");
+	     	//System.out.println("move down");
 		}
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
 			user.setUp();
-			System.out.println("move up");
+			//System.out.println("move up");
 		} 
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {
 			user.setRight();
-			System.out.println("move right");
+			//System.out.println("move right");
 		}
 	//	repaint();
 	}

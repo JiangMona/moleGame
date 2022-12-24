@@ -3,15 +3,14 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Obstacles{
-	private ImageIcon icicle;
-	private int x;
-	private int y;
+	ImageIcon img;
+	int x;
+	int y;
 	
 	public Obstacles(int x, int y) {
 		this.x = x;
 		this.y = y;
-		y = -3;//start a little before the screen for smoother transition
-		icicle = new ImageIcon("ice.png");
+		img = new ImageIcon("ice.png");
 	}
 	
 	public void setY(int y) {
@@ -40,7 +39,7 @@ public class Obstacles{
 	}
 	
 	public Rectangle getRect() {
-		return new Rectangle(x, y, 40, 40);
+		return new Rectangle(x, y, 38, 38);
 	}
 	
 	public boolean isOutOfScreen() {
@@ -50,8 +49,7 @@ public class Obstacles{
 	}
 	
 	public void myDraw(Graphics g) {
-		g.drawImage(icicle.getImage(), x, y, 40, 40, null);
+		g.drawImage(img.getImage(), x, y, 40, 40, null);
 	}
 	
 }
-	
