@@ -11,7 +11,6 @@ public class MenuPanel extends JPanel implements ActionListener{
 	private JLabel bg;
 	private static ImageIcon startGame, highS, instruct, leave;
 	public MenuPanel() {
-		
 		this.setLayout(null);//not using premade layout
 		
 		startGame = new ImageIcon("startGame.png");
@@ -34,16 +33,15 @@ public class MenuPanel extends JPanel implements ActionListener{
 		leave= new ImageIcon("exit.png");
 		exit = new JButton(leave); 
 		makeClearButton(exit);
-
 		//b1.setLocation(30, 200);
 		//b1.setSize(200, 30);
-		game.setBounds(75, 200, 200, 30); //same thing as set location and set size
+		game.setBounds(75, 300, 200, 30); //same thing as set location and set size
 		//this.add(game);//use _this_ to refer to the main panel itself
-		instructions.setBounds(300, 200, 250, 30); 
+		instructions.setBounds(300, 300, 250, 30); 
 		//this.add(instructions);
-		highScore.setBounds(75, 300, 200, 30); 
+		highScore.setBounds(75, 400, 200, 30); 
 		//this.add(highScore);
-		exit.setBounds(325, 300, 200, 35); 
+		exit.setBounds(325, 395, 200, 35); 
 		//this.add(exit);
 		
 		//ADDED ACTION LISTENER IN METHOD
@@ -63,15 +61,12 @@ public class MenuPanel extends JPanel implements ActionListener{
 		if(e.getSource()==game) {
 			//go to game
 			//MainP.cardsL.next(MainP.cont); //go to frame, go through layout, get next panel
-			MainP.menuP.setFocusable(false);
-			MainP.gameP.setFocusable(true);
-			MainP.gameP.requestFocus();
-			MainP.gameP.setFocusToGameP();
 			MainP.cardsL.show(MainP.cont, "game");//MainP is class -_> call static variable container 
 		}
 		else if(e.getSource()==instructions) {
 			//go to instructions
-			MainP.cardsL.show(MainP.cont, "instructions");
+			JOptionPane.showMessageDialog(null, "INSTRUCTION: JUMPJUMPJUAJEJDHKEAJFHKEJABFEKJAN UTKSVIUBKAY5EIV7K");
+			JOptionPane.showMessageDialog(null, "BABABABABP");
 		}
 		else if(e.getSource()==highScore) {
 			

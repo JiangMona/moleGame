@@ -2,18 +2,19 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class GamePanel extends JPanel{
-	private StatsP stats;
+//	private StatsP stats;
 	private PlayP play;
 
 	public GamePanel() {
 		
 		//set layout
-		stats= new StatsP();
+		//stats= new StatsP();
 		play= new PlayP();
 		
 		this.setLayout(new BorderLayout());
-		this.add(stats, BorderLayout.SOUTH);
+		//this.add(stats, BorderLayout.SOUTH);
 		this.add(play, BorderLayout.CENTER);
+		setFocusToGameP();
 		
 	}
 	 public void setFocusToGameP() {
