@@ -38,15 +38,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			obstacles.add(ice);
 		}
 		
-		for (int i =0; i<12; i++) {
-			for (int j=0; j<9; j++) { 
-				if ((int)(Math.random()*5+1)%5==0 && !map.isLand(j,i)) { //make stars spawn randomly
-						Obstacles star = new Star(i*50, j*50);
-						obstacles.add(star);
-					
-				}
-			}
-		}
+		resetStars();
 	}
 	public void paintComponent(Graphics g){
 		 super.paintComponent(g);
@@ -58,6 +50,21 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		 for(int i = 0; i < obstacles.size();i++) {
 				obstacles.get(i).myDraw(g);
 		 }
+	}
+	
+	public void resetStars() {
+		for(int i = 0; i < obstacles.size(); i++) { // remove current stars before adding new ones
+			if(!obstacles.get(i).isIceCube())
+				obstacles.remove(i);
+		}
+		for (int i =0; i<12; i++) {
+			for (int j=0; j<9; j++) { 
+				if ((int)(Math.random()*5+1)%5==0 && !map.isLand(j,i)) { //make stars spawn randomly
+						Obstacles star = new Star(i*50, j*50);
+						obstacles.add(star);
+				}
+			}
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -86,6 +93,8 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 				
 				if(obstacles.get(i).getRect().intersects(user.getRect())) {
 					if(obstacles.get(i).isIceCube()) {  //move ice down
+						if(user.getLives() - 1<= 0)
+							resetStars();
 						user.loseLife();
 						obstacles.get(i).setY(obstacles.get(i).getY() + 50);
 					}
@@ -94,6 +103,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 						user.addScore();
 						obstacles.remove(i); //remove star
 						System.out.println("yum");
+						System.out.println(user.getScore());
 					}
 				}
 				
