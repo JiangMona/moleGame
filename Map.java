@@ -1,8 +1,11 @@
 import java.awt.*;
+import java.io.File;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 
 public class Map {
+	/*
 	private int map[][]= {//1 is land 0 is water
 			{0,0,1,1,1,1,1,1,0,0,1,0},
 			{1,0,1,1,0,0,0,0,0,0,0,1},
@@ -15,7 +18,32 @@ public class Map {
 			{1,1,1,1,1,1,1,1,1,1,1,1}
 			
 	};
+	*/
+	private int map[][]= new int[9][12];
 	private ImageIcon water, land;
+	
+	
+	
+	public Map() {
+		try {
+			Scanner scFile = new Scanner(new File("map1.txt"));
+			for (int i =0; i< 9; i++) {
+				String str=scFile.nextLine();
+				for (int j=0; j<12; j++) {
+					int block=Integer.parseInt(str.substring(j*2, j*2+1));
+					map[i][j]=block;
+				}
+			
+			}
+			scFile.close();
+		}
+		
+		
+		catch(Exception e){
+			System.out.println("file???");
+		}
+		
+	}
 	
 	public Rectangle getRect(int x, int y){
 		return new Rectangle(x*50,y*50, 50, 50);   
@@ -31,10 +59,10 @@ public class Map {
 	public void drawMap(Graphics g){
 		water= new ImageIcon("water.gif");
 		land= new ImageIcon("land.png");
-		for (int i =0; i< map.length;i++) {
+		for (int i =0; i< map.length;i++) { //fill map from up to down, left to right
 			 for (int j =0; j<map[0].length; j++) {
 				 if (map[i][j]==0) {
-					 g.drawImage(water.getImage(),j*50,i*50,50, 50, null);
+					 g.drawImage(water.getImage(),j*50,i*50,50, 50, null); 
 				 }
 				 else {
 					 g.drawImage(land.getImage(),j*50,i*50,50, 50, null); 
