@@ -6,8 +6,8 @@ public class StatsP extends JPanel implements ActionListener{
 	private JPanel p;
 	private ImageIcon scoreBoard, back;
 	private JButton backBtn;
-	private JLabel showScore;
-	private int score;
+	private JLabel showScore, showLives;
+	private int score, lives;
 	
 	public StatsP() {
 		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -16,14 +16,22 @@ public class StatsP extends JPanel implements ActionListener{
 		makeClearButton(backBtn);
 		score=0;
 		showScore = new JLabel("Score: 0      ");
-		showScore.setFont(new Font("Verdana", Font.PLAIN, 30));
+		showScore.setFont(new Font("Verdana", Font.PLAIN, 18));
+		showLives = new JLabel("Lives: 5      ");
+		showLives.setFont(new Font("Verdana", Font.PLAIN, 18));
 		add(showScore);
+		add(showLives);
 		add(backBtn);
 	}
 	public void setScore(int x) {
 		score = x;
 		showScore.setText("Score: "+x+"     ");
 		
+	}
+	
+	public void setLives(int x) {
+		lives = x;
+		showLives.setText("Lives: "+x+"          ");
 	}
 	
 	public void resetScore() {

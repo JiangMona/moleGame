@@ -107,7 +107,8 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 						if(user.getLives() - 1<= 0)
 							resetStars();
 						user.loseLife();
-						obstacles.get(i).setY(obstacles.get(i).getY() + 50);
+						myStats.setLives(user.getLives());
+						obstacles.get(i).setY(obstacles.get(i).getY() + 70);
 					}
 					
 					else {//is star
