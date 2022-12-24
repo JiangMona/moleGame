@@ -30,7 +30,7 @@ public class Map {
 			for (int i =0; i< 9; i++) {
 				String str=scFile.nextLine();
 				for (int j=0; j<12; j++) {
-					int block=Integer.parseInt(str.substring(j*2, j*2+1));
+					int block=Integer.parseInt(str.substring(j*2, j*2+1)); //skip over commas
 					map[i][j]=block;
 				}
 			
