@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -12,16 +11,28 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	private ArrayList<Obstacles> obstacles;
 	private int num;
 	private int counter;
+	private StatsP myStats;
+	private ImageIcon startPause;;
 	
 	//icons 
 
 	public PlayP() { 
-		b = new JButton("STARTGAME");
-		setLayout(new FlowLayout());
-		add(b);
+		
+		setLayout(new BorderLayout());
+		myStats= new StatsP();
+		add(myStats, BorderLayout.SOUTH);
+		startPause = new ImageIcon("pause.png");
+		b = new JButton(startPause);
+		b.setOpaque(false);
+		b.setContentAreaFilled(false);
+		b.setBorderPainted(false);
+		b.setFocusPainted(false);
+		b.addKeyListener(this);//for setting focus
+		
 		addKeyListener(this);
-		b.addKeyListener(this);
+		myStats.add(b);
 		user = new User(1, 300);
+		
 		//obst = new Obstacles((int)(Math.random()*600));
 		Sprite.loadImages();
 		myTimer = new Timer(120, this); 
@@ -101,6 +112,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 					
 					else {//is star
 						user.addScore();
+						myStats.setScore(user.getScore()); 
 						obstacles.remove(i); //remove star
 						System.out.println("yum");
 						System.out.println(user.getScore());

@@ -1,31 +1,41 @@
 import java.awt.*;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class StatsP extends JPanel implements ActionListener{
 	private JPanel p;
-	private ImageIcon scoreBoard, back, startPause;
-	private JButton backBtn, startPauseBtn;
+	private ImageIcon scoreBoard, back;
+	private JButton backBtn;
+	private JLabel showScore;
+	private int score;
+	
 	public StatsP() {
 		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		//p = new JPanel();
-		//p.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		//add(p, BorderLayout.CENTER);
 		back= new ImageIcon("back.png");
 		backBtn = new JButton(back);
-		startPause = new ImageIcon("pause.png");
-		startPauseBtn = new JButton(startPause);
 		makeClearButton(backBtn);
-		makeClearButton(startPauseBtn);
-		add(startPauseBtn);
+		score=0;
+		showScore = new JLabel("Score: 0      ");
+		showScore.setFont(new Font("Verdana", Font.PLAIN, 30));
+		add(showScore);
 		add(backBtn);
-		//p.add(startPauseBtn);
-		//p.add(backBtn);
-
 	}
+	public void setScore(int x) {
+		score = x;
+		showScore.setText("Score: "+x+"     ");
+		
+	}
+	
+	public void resetScore() {
+		//later add o array list of scores to find high score
+		score=0;
+	}
+	
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
 		
 		scoreBoard= new ImageIcon("scoreBoard.png");
 		g.drawImage(scoreBoard.getImage(), 0, 0, 600, 150, null);
+	
 		
 	}
 	
@@ -33,7 +43,6 @@ public class StatsP extends JPanel implements ActionListener{
 		if(e.getSource()==backBtn) {
 			MainP.cardsL.show(MainP.cont, "menu");
 			//go to menu
-
 		}
 	}
 	public void makeClearButton(JButton b) {
@@ -42,7 +51,7 @@ public class StatsP extends JPanel implements ActionListener{
 		b.setContentAreaFilled(false);
 		b.setBorderPainted(false);
 		b.setFocusPainted(false);
-		//add cation listener
+		//listener
 		b.addActionListener(this);
 	}
 

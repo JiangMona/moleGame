@@ -8,6 +8,7 @@ public class User {
 	private int vel, vert;//left/right, up/down
 	private int score, lives;
 	private BufferedImage playerImg=null;
+	
 
    public User(int x,int y){
      this.x=x;
@@ -82,14 +83,14 @@ public class User {
       vert=+10;
 	} 
 		   
-   public Rectangle getRect(){
+   public Rectangle getRect(){ //collisions with obstacles
 	   return new Rectangle(x,y, 37, 37);   
    }
    
-   public Rectangle getUserMoveRect() {
+   public Rectangle getUserMoveRect() {//moving towards land
 	   return new Rectangle(x+vel, y+vert, 37, 37);
    }
-   
+ 
    public void loseLife() {
 	   lives -= 1;
 	   if(lives <= 0) {
