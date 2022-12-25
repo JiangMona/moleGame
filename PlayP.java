@@ -70,7 +70,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		}
 		for (int i =0; i<12; i++) {
 			for (int j=0; j<9; j++) { 
-				if ((int)(Math.random()*5+1)%5==0 && !map.isLand(j,i)) { //make stars spawn randomly
+				if ((int)(Math.random()*5+1)%5==0 && !map.isLand(j,i) && !(j==6 && i==0)) { //make stars spawn randomly but not where kirby spawns
 						Obstacles star = new Star(i*50, j*50);
 						obstacles.add(star);
 				}
@@ -104,8 +104,10 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 				
 				if(obstacles.get(i).getRect().intersects(user.getRect())) {
 					if(obstacles.get(i).isIceCube()) {  //move ice down
-						if(user.getLives() - 1<= 0)
+						if(user.getLives() - 1<= 0) {
 							resetStars();
+							myStats.resetScore();//////////////
+						}
 						user.loseLife();
 						myStats.setLives(user.getLives());
 						obstacles.get(i).setY(obstacles.get(i).getY() + 70);

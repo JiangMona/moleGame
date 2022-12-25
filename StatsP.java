@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 public class StatsP extends JPanel implements ActionListener{
 	private JPanel p;
@@ -8,6 +10,7 @@ public class StatsP extends JPanel implements ActionListener{
 	private JButton backBtn;
 	private JLabel showScore, showLives;
 	private int score, lives;
+	private ArrayList<Integer> myScores;
 	
 	public StatsP() {
 		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -22,6 +25,7 @@ public class StatsP extends JPanel implements ActionListener{
 		add(showScore);
 		add(showLives);
 		add(backBtn);
+		myScores= new ArrayList<Integer>();
 	}
 	public void setScore(int x) {
 		score = x;
@@ -36,7 +40,18 @@ public class StatsP extends JPanel implements ActionListener{
 	
 	public void resetScore() {
 		//later add o array list of scores to find high score
-		score=0;
+		myScores.add(score);
+		setScore(0);
+		
+	}
+	public int getHighSchore() {
+		int max=0;
+		for (int i =0; i< myScores.size(); i++) {
+			if (max< myScores.get(i)) {
+				max = myScores.get(i);
+			}
+		}
+		return max;
 	}
 	
 	public void paintComponent(Graphics g) {//no double buffering --> double buffering: java creates off screen image and replaces entire screen
