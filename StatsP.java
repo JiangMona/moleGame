@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -11,6 +13,7 @@ public class StatsP extends JPanel implements ActionListener{
 	private JLabel showScore, showLives;
 	private int score, lives;
 	private ArrayList<Integer> myScores;
+	private Font pixelFont;
 	
 	public StatsP() {
 		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -18,10 +21,23 @@ public class StatsP extends JPanel implements ActionListener{
 		backBtn = new JButton(back);
 		makeClearButton(backBtn);
 		score=0;
-		showScore = new JLabel("Score: 0      ");
-		showScore.setFont(new Font("Verdana", Font.PLAIN, 18));
-		showLives = new JLabel("Lives: 5      ");
-		showLives.setFont(new Font("Verdana", Font.PLAIN, 18));
+		lives = 5;
+		// import custom pixel font
+		try {
+		    pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("PixelFont.ttf")).deriveFont(12f);
+		    GraphicsEnvironment g = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		    g.registerFont(pixelFont);
+		} 
+		catch (IOException e) {
+		    e.printStackTrace();
+		} 
+		catch(FontFormatException e) {
+		    e.printStackTrace();
+		}
+		showScore = new JLabel("Score: 0  ");
+		showScore.setFont(pixelFont);
+		showLives = new JLabel("Lives: 5  ");
+		showLives.setFont(pixelFont);
 		add(showScore);
 		add(showLives);
 		add(backBtn);
@@ -29,13 +45,13 @@ public class StatsP extends JPanel implements ActionListener{
 	}
 	public void setScore(int x) {
 		score = x;
-		showScore.setText("Score: "+x+"     ");
+		showScore.setText("Score: "+x+"  ");
 		
 	}
 	
 	public void setLives(int x) {
 		lives = x;
-		showLives.setText("Lives: "+x+"          ");
+		showLives.setText("Lives: "+x+"   ");
 	}
 	
 	public void resetScore() {

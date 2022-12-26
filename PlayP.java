@@ -45,7 +45,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		
 		
 		for(int i = 0; i < 3; i++) { // spawn a few ice cubes at first so the user can't just run past the first row 
-			Obstacles ice = new Obstacles((int)(Math.random()*500)+50, 125);
+			Obstacles ice = new Obstacles((int)(Math.random()*461)+50, 125);
 			obstacles.add(ice);
 		}
 		
@@ -94,7 +94,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			counter++;
 			
 			if(counter%15 == 0) {
-				obstacles.add(new Obstacles((int)(Math.random()*600), -3));//x coordinate of obstacle to be dropped 
+				obstacles.add(new Obstacles((int)(Math.random()*561), -3));//x coordinate of obstacle to be dropped 
 			}
 			
 			for(int i = 0; i < obstacles.size();i++) {
