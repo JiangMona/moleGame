@@ -108,8 +108,6 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			}
 			
 			map.setMove(-user.getVert());
-			
-			
 			counter++;
 			
 			if(counter%15 == 0) {
@@ -126,22 +124,23 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 						if(user.getLives() - 1<= 0) {
 							resetStars();
 							myStats.resetScore();//////////////
-						}
-						user.loseLife();
-						if (user.getDead()) {
 							map.reset();
 						}
+						user.loseLife();
+						
 						myStats.setLives(user.getLives());
 						obstacles.get(i).setY(obstacles.get(i).getY() + 70);
 					}
 					
 					else {//is star
+						
 						user.addScore();
 						myStats.setScore(user.getScore()); 
 						obstacles.remove(i); //remove star
 						System.out.println("yum");
 						System.out.println(user.getScore());
 					}
+					
 				}
 				
 				if(obstacles.get(i).isOutOfScreen()) {

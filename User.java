@@ -115,13 +115,7 @@ public class User {
 	   }
 	   
    }
-   public void setDead(boolean player) {
-	   isDead=player;
-   }
-   public boolean getDead() {
-	   return isDead;
-   }
-   
+  
    public void addScore() {
 	   score += 50;
    }

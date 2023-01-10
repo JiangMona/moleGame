@@ -25,6 +25,7 @@ public class Map {
 	
 	
 	public Map() {
+		
 		reset();
 	}
 	public void reset() {
@@ -53,6 +54,9 @@ public class Map {
 		System.out.println(upDown);
 	}
 	
+	public int getUpDown() {
+		return upDown;
+	}
 	
 
 	public Rectangle getRect(int x, int y){
@@ -69,6 +73,9 @@ public class Map {
 		}
 		return false;
 	}
+	
+	
+	
 	
 	public void drawMap(Graphics g){
 		water= new ImageIcon("water.gif");
