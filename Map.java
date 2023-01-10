@@ -20,14 +20,11 @@ public class Map {
 	*/
 	private int map[][]= new int[9][12];
 	private ImageIcon water, land;
-	private int upDown;
+	private int upDown, vert;
 	
 	
 	
 	public Map() {
-		reset();
-	}
-	public void reset() {
 		try {
 			Scanner scFile = new Scanner(new File("map1.txt"));
 			for (int i =0; i< 9; i++) {
@@ -44,23 +41,21 @@ public class Map {
 		catch(Exception e){
 			System.out.println("Error: "+e);
 		}
+		vert =0;
 		
-		upDown=0;
 	}
 	
 	public void setMove(int i) {
 		upDown+= i;
-		System.out.println(upDown);
 	}
 	
 	
-
 	public Rectangle getRect(int x, int y){
+		return new Rectangle(x*50,y*50+upDown, 50, 50);   
+	} 
 	
-			return new Rectangle(x*50,y*50+upDown, 50, 50);   
-	 
-			
-		
+	public Rectangle getNextRect(int x, int y){
+		return new Rectangle(x*50,y*50+upDown+vert, 50, 50);   
 	} 
 	
 	public boolean isLand(int x, int y) {
@@ -68,6 +63,18 @@ public class Map {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setVert(int i) {
+		vert = i;
+	}
+	
+	public void setUpDown(int i) {
+		upDown = i;
+	}
+	
+	public int getUpDown() {
+		return upDown;
 	}
 	
 	public void drawMap(Graphics g){

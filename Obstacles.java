@@ -1,16 +1,27 @@
+/*
+Name: Mona Jiang and Catharine Zhou
+Class: ICS3U7-1
+Teacher: Ms. Strelkovska
+Assignment: Final Project
+Description: Obstacles for Kirby Adventures game
+*/
+
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Obstacles{
-	ImageIcon img;
-	int x;
+	private ImageIcon img;
+	private int x;
 	int y;
+	private int upDown;
 	
 	public Obstacles(int x, int y) {
 		this.x = x;
 		this.y = y;
 		img = new ImageIcon("ice.png");
+		upDown = 0;
 	}
 	
 	public void setY(int y) {
@@ -48,8 +59,23 @@ public class Obstacles{
 		return false;
 	}
 	
+	public void setUpDown(int i) {
+		upDown = i;
+	}
+	
+	public int getUpDown() {
+		return upDown;
+	}
+	
+	public void setImg(ImageIcon ic) {
+		img = ic;
+	}
+	
 	public void myDraw(Graphics g) {
-		g.drawImage(img.getImage(), x, y, 40, 40, null);
+		if (isIceCube())
+			g.drawImage(img.getImage(), x, y, 40, 40, null);
+		else
+			g.drawImage(img.getImage(), x, y+upDown, 40, 40, null);
 	}
 	
 }
