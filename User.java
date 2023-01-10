@@ -8,9 +8,11 @@ public class User {
 	private int vel, vert;//left/right, up/down
 	private int score, lives;
 	private BufferedImage playerImg=null;
+	boolean isDead;
 	
 
-   public User(int x,int y){
+   public User(int x, int y){
+	   
      this.x=x;
      this.y=y;
      upDown = false;
@@ -19,6 +21,7 @@ public class User {
      stay=true;  
      score = 0;
      lives = 5;
+     isDead=false;
    }
    
    public int getScore() {
@@ -35,6 +38,14 @@ public class User {
    public int getY(){
 	   return y;
    }
+   public int getVel(){
+	   return vel;
+   }	   
+   public int getVert(){
+	   return vert;
+   }
+   
+   
    public void move(){
 	   //if (x < 0 || y <0 || x> 600 || y > 446)
 	   if (x + vel < 0 || y + vert < 0||x + vel >= 570 || y + vert >= 406) { //out of screen
@@ -72,15 +83,17 @@ public class User {
 	} 
    public void setUp(){
 	  upDown = true;
-      stay=false;   
+      stay=false; 
       vel=0;
-      vert=-10;
+      vert=-5;
+      
+      
 	} 
    public void setDown(){
 	  upDown = true;
       stay=false;
       vel=0;
-      vert=+10;
+      vert=5;
 	} 
 		   
    public Rectangle getRect(){ //collisions with obstacles
@@ -90,16 +103,23 @@ public class User {
    public Rectangle getUserMoveRect() {//moving towards land
 	   return new Rectangle(x+vel, y+vert, 37, 37);
    }
+   
  
    public void loseLife() {
 	   lives -= 1;
 	   if(lives <= 0) {
 		   lives = 5;
-		   x = 1;
-		   y = 300;
+		   this.x = 1;
+		   this.y = 300;
 		   score = 0;
 	   }
 	   
+   }
+   public void setDead(boolean player) {
+	   isDead=player;
+   }
+   public boolean getDead() {
+	   return isDead;
    }
    
    public void addScore() {

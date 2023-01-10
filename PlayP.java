@@ -12,7 +12,8 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 	private int num;
 	private int counter;
 	private StatsP myStats;
-	private ImageIcon startPause;;
+	private ImageIcon startPause;
+	private boolean isFlyUp;
 	
 	//icons 
 
@@ -31,7 +32,7 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		
 		addKeyListener(this);
 		myStats.add(b);
-		user = new User(1, 300);
+		user = new User(1,300);
 		
 		//obst = new Obstacles((int)(Math.random()*600));
 		Sprite.loadImages();
@@ -78,18 +79,36 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		}
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==myTimer){
-			for (int i =0; i<12; i++) {
-				for (int j=0; j<9; j++) {
-					if (map.isLand(j,i)) {
+	public boolean hitLand() {
+
+		for (int i =0; i<12; i++) {
+			for (int j=0; j<9; j++) {
+				if (map.isLand(j,i)) {
 						if (user.getUserMoveRect().intersects(map.getRect(i,j))) {
-							user.setStay(); 
-						}
-				
+							return true;
 					}
+					
+					/*
+					if (user.getRect().intersects(map.getRect(i,j))) {
+						return true;
+					}
+					*/
+			
 				}
 			}
+		}
+		return false;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==myTimer){
+			if (hitLand()) {
+				//map.setMove(0);
+				user.setStay();
+			}
+			
+			map.setMove(-user.getVert());
+			
 			
 			counter++;
 			
@@ -109,6 +128,9 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 							myStats.resetScore();//////////////
 						}
 						user.loseLife();
+						if (user.getDead()) {
+							map.reset();
+						}
 						myStats.setLives(user.getLives());
 						obstacles.get(i).setY(obstacles.get(i).getY() + 70);
 					}
@@ -130,9 +152,9 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			}
 			
 			//move user and repaint
-			user.move();
-			
+		
 			repaint();
+			user.move();
 		}
 	}
 	public void keyPressed( KeyEvent e ){  
@@ -141,11 +163,18 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 			//System.out.println("move left");
 		}
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("S")) {
-	     	user.setDown();
+		
+		    // 	map.setMove(-10);
+		     	user.setDown();
+		   
 	     	//System.out.println("move down");
 		}
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("W")) {
 			user.setUp();
+		
+			
+			
+			
 			//System.out.println("move up");
 		} 
 		else if(KeyEvent.getKeyText(e.getKeyCode()).equals("D")) {
@@ -159,4 +188,6 @@ public class PlayP extends JPanel implements KeyListener, ActionListener{
 		user.setStay();
 	}
 	public void keyTyped( KeyEvent e )   {   }
+	
+	
 }
